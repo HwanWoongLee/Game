@@ -1,0 +1,34 @@
+{
+  "statData": [
+    {
+      "level": 0,
+      "damagePrice": 65,
+      "fireSpeedPrice": 30,
+      "moveSpeedPrice": 25
+    },
+    {
+      "level": 1,
+      "damagePrice": 130,
+      "fireSpeedPrice": 60,
+      "moveSpeedPrice": 50
+    },
+    {
+      "level": 2,
+      "damagePrice": 195,
+      "fireSpeedPrice": 90,
+      "moveSpeedPrice": 75
+    },
+    {
+      "level": 3,
+      "damagePrice": 260,
+      "fireSpeedPrice": 120,
+      "moveSpeedPrice": 100
+    },
+    {
+      "level": 4,
+      "damagePrice": 0,
+      "fireSpeedPrice": 0,
+      "moveSpeedPrice": 0
+    }
+  ]
+}

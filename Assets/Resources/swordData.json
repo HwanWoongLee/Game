@@ -1,0 +1,39 @@
+{
+    "statData": [
+  {
+    "type": "sword",
+    "level": 1,
+    "damage": 20,
+    "moveSpeed": 1,
+    "fireSpeed": 20
+  },
+  {
+    "type": "sword",
+    "level": 2,
+    "damage": 40,
+    "moveSpeed": 1.5,
+    "fireSpeed": 19
+  },
+  {
+    "type": "sword",
+    "level": 3,
+    "damage": 60,
+    "moveSpeed": 2,
+    "fireSpeed": 17
+  },
+  {
+    "type": "sword",
+    "level": 4,
+    "damage": 80,
+    "moveSpeed": 2.5,
+    "fireSpeed": 15
+  },
+  {
+    "type": "sword",
+    "level": 5,
+    "damage": 100,
+    "moveSpeed": 3,
+    "fireSpeed": 12
+  }
+]
+}
