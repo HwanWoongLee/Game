@@ -11,8 +11,6 @@ public enum GameState
     ready
 }
 
-
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -171,8 +169,12 @@ public class GameManager : MonoBehaviour
                 case GameState.ready:
                     break;
                 case GameState.store:
+                    SoundManager.instance.PlayEffectSound(0);
+                    StateTransition(GameState.main);
                     break;
                 case GameState.store2:
+                    SoundManager.instance.PlayEffectSound(0);
+                    StateTransition(GameState.main);
                     break;
             }
         }
@@ -222,7 +224,6 @@ public class GameManager : MonoBehaviour
 
                     InitGame();
                     DataManager.Instance.SetData();
-
                 }
                 break;
             case GameState.store:

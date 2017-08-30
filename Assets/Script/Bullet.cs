@@ -154,6 +154,7 @@ public class Bullet : MonoBehaviour
                     return;
                 }
             }
+
             if (this.thisType == BulletManager.bulletType.bounce)
             {
                 bounceNum--;
@@ -198,29 +199,37 @@ public class Bullet : MonoBehaviour
                 {
                     OffBullet();
                 }
-      
+
                 //피격이펙트
-                GameObject _effect = Instantiate(exEffect[2]);
+                GameObject _effect = BulletManager.instance.GetEffect(9);
                 _effect.transform.position = other.transform.position;
-                Destroy(_effect, 1.5f);
+                _effect.GetComponent<ParticleSystem>().time = 0;
+                _effect.GetComponent<ParticleSystem>().Play();
+                _effect.gameObject.SetActive(true);               
             }
             else if (this.thisType == BulletManager.bulletType.sword)
             {
-                GameObject _effect = Instantiate(exEffect[1]);
+                GameObject _effect = BulletManager.instance.GetEffect(9);
                 _effect.transform.position = other.transform.position;
-                Destroy(_effect, 1.5f);
+                _effect.GetComponent<ParticleSystem>().time = 0;
+                _effect.GetComponent<ParticleSystem>().Play();
+                _effect.gameObject.SetActive(true);            
             }
             else if (this.thisType == BulletManager.bulletType.explosion)
             {
-                GameObject _effect = Instantiate(exEffect[0]);
+                GameObject _effect = BulletManager.instance.GetEffect(8);
                 _effect.transform.position = other.transform.position;
-                Destroy(_effect, 1.5f);
+                _effect.GetComponent<ParticleSystem>().time = 0;
+                _effect.GetComponent<ParticleSystem>().Play();
+                _effect.gameObject.SetActive(true);
             }
             else
             {
-                GameObject _effect = Instantiate(exEffect[2]);
+                GameObject _effect = BulletManager.instance.GetEffect(7);
                 _effect.transform.position = other.transform.position;
-                Destroy(_effect, 1.5f);
+                _effect.GetComponent<ParticleSystem>().time = 0;
+                _effect.GetComponent<ParticleSystem>().Play();
+                _effect.gameObject.SetActive(true);            
             }
         }
 

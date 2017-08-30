@@ -5,7 +5,7 @@ public class Store : MonoBehaviour
 {
     public Camera uiCam;
 
-    public UISprite image;
+    public GameObject[] image = new GameObject[7];
 
     public Player player;
 
@@ -39,7 +39,15 @@ public class Store : MonoBehaviour
 
     private void OnEnable()
     {
+        for (int i = 0; i < 7; i++)
+        {
+            image[i].SetActive(false);
+        }
+
+        image[0].SetActive(true);
+
         player.GetPlayerJsonData();
+        arrowMove = false;
         arrow.transform.localPosition = new Vector3(-1000, -1500, 0);
         selectNum = 0;
         levels[0] = GameManager.instance.redLevel[selectNum];
@@ -80,37 +88,86 @@ public class Store : MonoBehaviour
                 {
                     case "normal":
                         arrowMove = true;
-                        image.spriteName = "player01";
+
+                        for (int i = 0; i < 7; i++)
+                        {
+                            image[i].SetActive(false);
+                        }
+
+                        image[0].SetActive(true);
+
                         selectNum = 0;
                         break;
                     case "big":
                         arrowMove = true;
-                        image.spriteName = "player02";
+
+                        for (int i = 0; i < 7; i++)
+                        {
+                            image[i].SetActive(false);
+                        }
+
+                        image[1].SetActive(true);
+
                         selectNum = 1;
                         break;
                     case "laser":
                         arrowMove = true;
-                        image.spriteName = "player03";
+
+                        for (int i = 0; i < 7; i++)
+                        {
+                            image[i].SetActive(false);
+                        }
+
+                        image[2].SetActive(true);
+
                         selectNum = 2;
                         break;
                     case "bounce":
                         arrowMove = true;
-                        image.spriteName = "player04";
+
+                        for (int i = 0; i < 7; i++)
+                        {
+                            image[i].SetActive(false);
+                        }
+
+                        image[3].SetActive(true);
+
                         selectNum = 3;
                         break;
                     case "guided":
                         arrowMove = true;
-                        image.spriteName = "player05";
+
+                        for (int i = 0; i < 7; i++)
+                        {
+                            image[i].SetActive(false);
+                        }
+
+                        image[4].SetActive(true);
+
                         selectNum = 4;
                         break;
                     case "sword":
                         arrowMove = true;
-                        image.spriteName = "player06";
+
+                        for (int i = 0; i < 7; i++)
+                        {
+                            image[i].SetActive(false);
+                        }
+
+                        image[5].SetActive(true);
+
                         selectNum = 5;
                         break;
                     case "explosion":
                         arrowMove = true;
-                        image.spriteName = "player07";
+
+                        for (int i = 0; i < 7; i++)
+                        {
+                            image[i].SetActive(false);
+                        }
+
+                        image[6].SetActive(true);
+
                         selectNum = 6;
                         break;
                 }
@@ -237,7 +294,7 @@ public class Store : MonoBehaviour
         {
             arrow.transform.position = Vector3.MoveTowards(arrow.transform.position,
                                                 target.transform.position,
-                                               .3f);
+                                               .5f);
             if (arrow.transform.position == target.transform.position)
             {
                 arrowMove = false;

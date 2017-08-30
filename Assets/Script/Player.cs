@@ -271,6 +271,8 @@ public class Player : MonoBehaviour
     //기체 파워업
     private void PowerUp()
     {
+        SoundManager.instance.PlayEffectSound(21);
+
         powerNum++;
 
         MakeDummy();
@@ -382,6 +384,8 @@ public class Player : MonoBehaviour
                 gaugeState = true;
                 limit = powerGauge + 20f;
                 GetItem(1);
+
+                SoundManager.instance.PlayEffectSound(23);
                 break;
             case "MoveItem":
                 getSpeedItem = true;
@@ -389,11 +393,15 @@ public class Player : MonoBehaviour
                 moveSpeed += 3f;
 
                 GetItem(0);
+
+                SoundManager.instance.PlayEffectSound(20);
                 break;
             case "MagnetItem":
                 getMagnetItem = true;
                 magnetTime = 0f;
                 GetItem(2);
+
+                SoundManager.instance.PlayEffectSound(22);
                 break;
             //적충돌
             case "Enemy":
@@ -427,24 +435,37 @@ public class Player : MonoBehaviour
                 switch (other.GetComponent<GetBox>().thisBoxType)
                 {
                     case GetBox.boxType.normal:
+                        SoundManager.instance.PlayEffectSound(21);
+
                         ChangePlayerType(0);
                         break;
                     case GetBox.boxType.big:
+                        SoundManager.instance.PlayEffectSound(21);
+
                         ChangePlayerType(1);
                         break;
                     case GetBox.boxType.laser:
+                        SoundManager.instance.PlayEffectSound(21);
+
                         ChangePlayerType(2);
                         break;
                     case GetBox.boxType.bounce:
+                        SoundManager.instance.PlayEffectSound(21);
+
                         ChangePlayerType(3);
                         break;
                     case GetBox.boxType.guided:
+                        SoundManager.instance.PlayEffectSound(21);
+
                         ChangePlayerType(4);
                         break;
                     case GetBox.boxType.sword:
+                        SoundManager.instance.PlayEffectSound(21);
+
                         ChangePlayerType(5);
                         break;
                     case GetBox.boxType.explosion:
+                        SoundManager.instance.PlayEffectSound(21);
                         ChangePlayerType(6);
                         break;
                     case GetBox.boxType.coin:

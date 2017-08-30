@@ -48,10 +48,12 @@ public class Enemy : MonoBehaviour
     public int bossLife = 20;
     public int normalLife = 1;
 
+    //맞을때 이펙트, 라벨
     [SerializeField]
     private GameObject desEffect;
     [SerializeField]
     private GameObject damageLabel;
+
     [SerializeField]
     private GameObject getBox;
     
@@ -68,7 +70,10 @@ public class Enemy : MonoBehaviour
         aming = false;
         laserDelay = 0f;
         circleTime = 0f;
-
+        stayTime = 0f;
+        stayDelay = 1f;
+        
+        //타입별로 체력 set
         if (this.enemyType == EnemyType.boss)
         {
             Life = bossLife * (1 + GameManager.instance.stageNum);
@@ -86,6 +91,7 @@ public class Enemy : MonoBehaviour
             Life = normalLife * (1 + GameManager.instance.stageNum);
         }
 
+        //laser, circle 타입은 trail 효과를 켜줌
         if (this.enemyType == EnemyType.laser
             || this.enemyType == EnemyType.circle)
         {
@@ -131,7 +137,7 @@ public class Enemy : MonoBehaviour
         //원형 패턴
         else if (this.enemyType == EnemyType.circle)
         {
-            circleTime += Time.deltaTime * 2;
+            circleTime += Time.deltaTime * 3f;
 
             if (circleTime >= circleDelay)
             {
@@ -158,7 +164,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                moveSpeed = 0.05f;
+                moveSpeed = 0.035f;
             }
 
             //보스는 계속 이동
@@ -166,6 +172,7 @@ public class Enemy : MonoBehaviour
                                                             player.transform.position,
                                                             moveSpeed);
         }
+        //나머지
         else
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position,
@@ -173,6 +180,7 @@ public class Enemy : MonoBehaviour
                                                   moveSpeed * Time.deltaTime);
         }
 
+        //거리변수 업데이트
         if (this.gameObject.activeInHierarchy)
         {
             distance = Vector2.Distance(this.transform.position, player.transform.position);
@@ -263,11 +271,15 @@ public class Enemy : MonoBehaviour
             //죽는 이펙트
             GameObject _effect = Instantiate(desEffect);
             _effect.transform.position = this.transform.position;
-            Destroy(_effect, 0.5f);
+            Destroy(_effect, 3f);
 
             if (this.enemyType == EnemyType.boss)
             {
-                _effect.transform.localScale = new Vector3(10, 10, 10);
+                _effect.transform.localScale = new Vector3(4, 4, 4);
+                _effect.transform.FindChild("1").transform.localScale = new Vector3(4, 4, 4);
+                _effect.transform.FindChild("2").transform.localScale = new Vector3(4, 4, 4);
+                _effect.transform.FindChild("3").transform.localScale = new Vector3(4, 4, 4);
+
                 GameManager.instance.AddScore(10);      //10점
 
                 //Item Drop
@@ -381,13 +393,14 @@ public class Enemy : MonoBehaviour
         }
         else if (other.transform.tag.Equals("BobmEffect"))
         {
-            if (this.enemyType == EnemyType.laser)
+            if (this.enemyType == EnemyType.laser 
+                || this.enemyType == EnemyType.circle)
                 return;
 
-            Life -= other.GetComponent<Bullet>().bulletDamage;
+            Life -= player.Damage;
             
             //데미지 표시
-            ShowDamage(other.GetComponent<Bullet>().bulletDamage, this.transform.position);
+            ShowDamage(player.Damage, this.transform.position);
 
             DeadCheck();
 
@@ -404,6 +417,39 @@ public class Enemy : MonoBehaviour
             ShowDamage(999, this.transform.position);
 
             DeadCheck();
+        }
+    }
+
+    float stayTime = 0f;
+    float stayDelay = 1f;
+
+    private void OnTriggerStay(Collider other)
+    {
+        stayTime += Time.deltaTime;
+
+        if (stayTime >= stayDelay)
+        {
+            if (other.transform.tag.Equals("BobmEffect"))
+            {
+                if (this.enemyType == EnemyType.laser
+                    || this.enemyType == EnemyType.circle)
+                    return;
+
+                Life -= player.Damage;
+
+                //데미지 표시
+                ShowDamage(player.Damage, this.transform.position);
+
+                DeadCheck();
+
+                if (this.enemyType == EnemyType.boss)
+                {
+                    EnemyManager.instance.bossCurLife = Life;
+                    EnemyManager.instance.bossTotalLife = standardLife;
+                }
+
+                stayDelay += 1f;
+            }
         }
     }
 }

@@ -26,7 +26,8 @@ public class ItemObj : MonoBehaviour {
 
     private void Update()
     {
-        if (GameManager.instance.curGameState == GameState.game)
+        if (GameManager.instance.curGameState == GameState.game
+            || GameManager.instance.curGameState == GameState.store)
         {
             //거리가 10이상이면 꺼줌.
             if (DistanceToPlayer() >= 15f)
@@ -46,10 +47,12 @@ public class ItemObj : MonoBehaviour {
                     }
                 }
             }
-            if(this.transform.tag.Equals("Warning"))
+            if(this.transform.tag.Equals("Warning") 
+                || this.transform.tag.Equals("Effect")
+                || this.transform.tag.Equals("BobmEffect"))
             {
                 offTime += Time.deltaTime;
-                if (offTime >= 3f)
+                if (offTime >= 2.5f)
                 {
                     this.gameObject.SetActive(false);
                 }

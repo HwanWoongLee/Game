@@ -19,8 +19,28 @@ public class exEnemy : MonoBehaviour
 
             //데미지 표시
             ShowDamage(GameManager.instance.player.Damage, this.transform.position);
+
         }
 
+    }
+
+    float curTime = 0;
+    float delayTime = 1;
+
+    private void OnTriggerStay(Collider other)
+    {
+        curTime += Time.deltaTime;
+
+        if (curTime >= delayTime)
+        {
+            if (other.transform.tag.Equals("BobmEffect"))
+            {
+                //데미지 표시
+                ShowDamage(GameManager.instance.player.Damage, this.transform.position);
+
+                delayTime += 1;
+            }
+        }
     }
 
     //Damage표시.

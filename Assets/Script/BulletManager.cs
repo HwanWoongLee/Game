@@ -69,6 +69,19 @@ public class BulletManager : ObjectManager
         return null;
     }
 
+    //7 = normal,8 = explosion,9 = sword
+    public GameObject GetEffect(int _num)
+    {
+        foreach(GameObject _effect in _objList[_num])
+        {
+            if(!_effect.activeInHierarchy)
+            {
+                return _effect;
+            }
+        }
+        return null;
+    }
+
     public override void InitObjs()
     {
         foreach(GameObject[] _objs in _objList)

@@ -17,8 +17,6 @@ public class EnemyManager : ObjectManager
     [SerializeField]
     private float maxRange, minRange;
 
-    [SerializeField]
-    private GameObject warningMark;
     public GameObject bossWarningLabel;
 
     private List<GameObject> warningList = new List<GameObject>();
@@ -50,7 +48,7 @@ public class EnemyManager : ObjectManager
 
         for (int i = 0; i < 200; i++)
         {
-            GameObject _warning = Instantiate(warningMark);
+            GameObject _warning = Instantiate(this.makeObj[1]);
             _warning.transform.parent = this.transform;
             _warning.SetActive(false);
 
@@ -212,11 +210,32 @@ public class EnemyManager : ObjectManager
                 }
             }
           
+            //Laser Type Enemy Rend
             if (laserTime >= rendDeleyTime * 10f)
             {
                 SoundManager.instance.PlayEffectSound(12);
-                int repeatNum = Random.Range(1, 6);
-                int dirNum = Random.Range(1, 5);
+
+                int maxLineNum = 2;
+                int minLineNum = 1;
+
+                if(GameManager.instance.stageNum <= 4)
+                {
+                    minLineNum = 1;
+                    maxLineNum = 2;
+                }
+                else if(GameManager.instance.stageNum <= 10)
+                {
+                    minLineNum = 2;
+                    maxLineNum = 4;
+                }
+                else
+                {
+                    minLineNum = 3;
+                    maxLineNum = 6;
+                }
+                
+                int repeatNum = Random.Range(minLineNum, maxLineNum);     //줄 숫자
+                int dirNum = Random.Range(1, 5);        //날아오는 방향
 
                 for (int i = 0; i < repeatNum; i++)
                 {
@@ -342,6 +361,7 @@ public class EnemyManager : ObjectManager
                     }
                 }
             }
+            //Circle Type Enemy Rend
             if (circleTime >= rendDeleyTime * 14f)
             {
                 SoundManager.instance.PlayEffectSound(12);
@@ -376,13 +396,13 @@ public class EnemyManager : ObjectManager
                                 = newEnemy.GetComponent<Enemy>().circleStandard
                                 = new Vector3(x , y, 0) + ((player.transform.position - new Vector3(x,y,0)) * 0.3f);
                             newEnemy.GetComponent<Enemy>().SetType(EnemyType.circle);
-                            newEnemy.GetComponent<Enemy>().circleDelay = (i + 3) * .2f;
+                            newEnemy.GetComponent<Enemy>().circleDelay = (i + 5) * .2f;
                             newEnemy.GetComponent<Enemy>().renderer.enabled = false;
                             newEnemy.SetActive(true);
                         }
                     }
                 
-                    if(i == 9)
+                    if(i == 29)
                     {
                         circleTime = 0f;
                     }
@@ -476,6 +496,7 @@ public class EnemyManager : ObjectManager
         }
     }
     
+    //적이 남아있는지 체크
     private bool CheckObj()
     {
         return GameObject.FindWithTag("Enemy");
