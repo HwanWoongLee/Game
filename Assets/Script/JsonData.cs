@@ -11,7 +11,7 @@ public class StatData
     public int level;
     public int damage;
     public float moveSpeed;
-    public int fireSpeed;
+    public float fireSpeed;
 }
 
 [Serializable]

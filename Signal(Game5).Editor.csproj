@@ -94,6 +94,18 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Google.VersionHandler">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.VersionHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.IOSResolver_v1.2.37.0">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.IOSResolver_v1.2.37.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.JarResolver_v1.2.37.0">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.JarResolver_v1.2.37.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandlerImpl_v1.2.37.0">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.VersionHandlerImpl_v1.2.37.0.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Signal(Game5).Plugins.csproj">
@@ -120,6 +132,26 @@
     <Compile Include="Assets\Editor\ImageEffects\SunShaftsEditor.cs" />
     <Compile Include="Assets\Editor\ImageEffects\TonemappingEditor.cs" />
     <Compile Include="Assets\Editor\ImageEffects\VignetteAndChromaticAberrationEditor.cs" />
+    <Compile Include="Assets\GoogleMobileAds\Editor\AdMobDependencies.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSAndroidSetupUI.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSDependencies.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSDocsUI.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSIOSSetupUI.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSPostBuild.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSProjectSettings.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSStrings.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSUpgrader.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSUtil.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\NearbyConnectionUI.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\PlistBuddyHelper.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Elements.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Lexer.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Objects.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\PBXProject.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Parser.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Sections.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Serializer.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Utils.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Editor\InvDatabaseInspector.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Editor\InvFindItem.cs" />
     <Compile Include="Assets\NGUI\Scripts\Editor\ActiveAnimationEditor.cs" />
@@ -206,6 +238,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Glow.shader" />
+    <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
+    <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
+    <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
@@ -243,6 +278,12 @@
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
+    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.35.0.txt" />
+    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.37.0.txt" />
+    <None Include="Assets\PlayServicesResolver\proguard-messaging-workaround.txt" />
+    <None Include="Assets\PlayServicesResolver\proguard-unity.txt" />
+    <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\MainLibProj\AndroidManifest.xml" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />

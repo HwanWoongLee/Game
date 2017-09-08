@@ -25,6 +25,7 @@ public class Store : MonoBehaviour
 
     public UILabel[] stoneLabel = new UILabel[3];
     public UILabel[] priceLabel = new UILabel[3];
+    public UILabel pName;
 
     private void Start()
     {
@@ -39,6 +40,8 @@ public class Store : MonoBehaviour
 
     private void OnEnable()
     {
+        ChangeName("normal");
+
         for (int i = 0; i < 7; i++)
         {
             image[i].SetActive(false);
@@ -49,7 +52,9 @@ public class Store : MonoBehaviour
         player.GetPlayerJsonData();
         arrowMove = false;
         arrow.transform.localPosition = new Vector3(-1000, -1500, 0);
+
         selectNum = 0;
+
         levels[0] = GameManager.instance.redLevel[selectNum];
         levels[1] = GameManager.instance.greenLevel[selectNum];
         levels[2] = GameManager.instance.blueLevel[selectNum];
@@ -87,6 +92,10 @@ public class Store : MonoBehaviour
                 switch (target.name)
                 {
                     case "normal":
+                        SoundManager.instance.PlayEffectSound(25);
+                        
+                        ChangeName("normal");
+
                         arrowMove = true;
 
                         for (int i = 0; i < 7; i++)
@@ -99,6 +108,10 @@ public class Store : MonoBehaviour
                         selectNum = 0;
                         break;
                     case "big":
+                        SoundManager.instance.PlayEffectSound(25);
+
+                        ChangeName("surfer");
+
                         arrowMove = true;
 
                         for (int i = 0; i < 7; i++)
@@ -111,6 +124,10 @@ public class Store : MonoBehaviour
                         selectNum = 1;
                         break;
                     case "laser":
+                        SoundManager.instance.PlayEffectSound(25);
+
+                        ChangeName("laser");
+
                         arrowMove = true;
 
                         for (int i = 0; i < 7; i++)
@@ -123,6 +140,10 @@ public class Store : MonoBehaviour
                         selectNum = 2;
                         break;
                     case "bounce":
+                        SoundManager.instance.PlayEffectSound(25);
+
+                        ChangeName("ninja");
+
                         arrowMove = true;
 
                         for (int i = 0; i < 7; i++)
@@ -135,6 +156,10 @@ public class Store : MonoBehaviour
                         selectNum = 3;
                         break;
                     case "guided":
+                        SoundManager.instance.PlayEffectSound(25);
+
+                        ChangeName("homing");
+
                         arrowMove = true;
 
                         for (int i = 0; i < 7; i++)
@@ -147,6 +172,10 @@ public class Store : MonoBehaviour
                         selectNum = 4;
                         break;
                     case "sword":
+                        SoundManager.instance.PlayEffectSound(25);
+
+                        ChangeName("samurai");
+
                         arrowMove = true;
 
                         for (int i = 0; i < 7; i++)
@@ -159,6 +188,10 @@ public class Store : MonoBehaviour
                         selectNum = 5;
                         break;
                     case "explosion":
+                        SoundManager.instance.PlayEffectSound(25);
+
+                        ChangeName("dragon");
+
                         arrowMove = true;
 
                         for (int i = 0; i < 7; i++)
@@ -187,6 +220,15 @@ public class Store : MonoBehaviour
                 SetPrice();
             }
         }
+    }
+
+    public void ChangeName(string name)
+    {
+
+        pName.GetComponent<TweenAlpha>().ResetToBeginning();
+        pName.GetComponent<TweenAlpha>().Play();
+
+        pName.text = name;
     }
 
     //stats 그래프 출력

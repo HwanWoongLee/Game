@@ -44,8 +44,10 @@ public class UIManager : MonoBehaviour {
 
     [SerializeField]
     private UISprite stageTime;
-
+    
     public GameObject[] curton;
+    public UILabel overStageNum;
+    int temp;
 
     private void Update()
     {
@@ -67,11 +69,13 @@ public class UIManager : MonoBehaviour {
                 gameStateUI[2].SetActive(false);
                 gameStateUI[3].SetActive(false);
                 gameStateUI[4].SetActive(false);
+
                 fade[1].GetComponent<TweenAlpha>().ResetToBeginning();
                 fade[1].GetComponent<TweenAlpha>().Play();
                 fade[2].GetComponent<TweenAlpha>().ResetToBeginning();
                 fade[2].GetComponent<TweenAlpha>().Play();
 
+                curton[2].SetActive(false);
                 break;
             case GameState.game:
                 gameStateUI[0].SetActive(false);
@@ -87,25 +91,25 @@ public class UIManager : MonoBehaviour {
                 curton[0].GetComponent<TweenPosition>().Play();
                 curton[1].GetComponent<TweenPosition>().ResetToBeginning();
                 curton[1].GetComponent<TweenPosition>().Play();
+
+                overStageNum.GetComponent<TweenPosition>().ResetToBeginning();
+                overStageNum.GetComponent<TweenPosition>().Play();
+                overStageNum.GetComponent<TweenScale>().ResetToBeginning();
+                overStageNum.GetComponent<TweenScale>().Play();
+
+                temp = GameManager.instance.stageNum + 1;
+
                 RendGauge();
                 break;
             case GameState.over:
-                gameStateUI[0].SetActive(false);
-                gameStateUI[1].SetActive(false);
-                gameStateUI[2].SetActive(true);
-                gameStateUI[3].SetActive(false);
-                gameStateUI[4].SetActive(false);
-
-                overMenu.GetComponent<TweenScale>().Play();
-
-                for (int i = 0; i < overButtons.Length; i++)
+                if(!GameManager.instance.overState)
                 {
-                    overButtons[i].GetComponent<TweenPosition>().Play();
+                    curton[2].SetActive(true);
+                    Invoke("GameOver", 2f);
                 }
-                fade[0].GetComponent<TweenAlpha>().ResetToBeginning();
-                fade[0].GetComponent<TweenAlpha>().Play();
 
-                InitTweenUI();
+                overStageNum.text = "stage : " + temp.ToString();
+
                 break;
             case GameState.store:
                 gameStateUI[0].SetActive(false);
@@ -140,6 +144,28 @@ public class UIManager : MonoBehaviour {
                 break;
         }
         RendText();
+    }
+
+    private void GameOver()
+    {
+        curton[2].SetActive(false);
+
+        gameStateUI[0].SetActive(false);
+        gameStateUI[1].SetActive(false);
+        gameStateUI[2].SetActive(true);
+        gameStateUI[3].SetActive(false);
+        gameStateUI[4].SetActive(false);
+
+        overMenu.GetComponent<TweenScale>().Play();
+
+        for (int i = 0; i < overButtons.Length; i++)
+        {
+            overButtons[i].GetComponent<TweenPosition>().Play();
+        }
+        fade[0].GetComponent<TweenAlpha>().ResetToBeginning();
+        fade[0].GetComponent<TweenAlpha>().Play();
+
+        InitTweenUI();
     }
 
     //uilabel rend

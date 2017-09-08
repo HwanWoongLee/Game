@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     public float stageLimitTime = 30f;
 
     public bool enemyRend = false;
-    private bool overState = false;
+    public bool overState = false;
     private bool starState = false;
     
     [SerializeField]
@@ -202,6 +202,14 @@ public class GameManager : MonoBehaviour
         pauseState = false;
     }
 
+    private void GameOver()
+    {
+        SoundManager.instance.StopBGMSound();
+        SoundManager.instance.PlayEffectSound(3);
+
+        InitGame();
+        DataManager.Instance.SetData();
+    }
 
     private void Game()
     {
@@ -219,12 +227,9 @@ public class GameManager : MonoBehaviour
             case GameState.over:
                 if (!overState)
                 {
-                    SoundManager.instance.StopBGMSound();
-                    SoundManager.instance.PlayEffectSound(3);
-
-                    InitGame();
-                    DataManager.Instance.SetData();
-                }
+                    Invoke("GameOver", 2f);
+                    overState = true;
+                }             
                 break;
             case GameState.store:
                 SetTimeScale(1);

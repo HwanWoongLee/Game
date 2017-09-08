@@ -5,28 +5,28 @@
     "level": 1,
     "damage": 1,
     "moveSpeed": 1,
-    "fireSpeed": 5
+    "fireSpeed": 3
   },
   {
     "type": "normal",
     "level": 2,
     "damage": 2,
     "moveSpeed": 1.5,
-    "fireSpeed": 4
+    "fireSpeed": 2.5
   },
   {
     "type": "normal",
     "level": 3,
     "damage": 3,
     "moveSpeed": 2,
-    "fireSpeed": 3
+    "fireSpeed": 2
   },
   {
     "type": "normal",
     "level": 4,
     "damage": 4,
     "moveSpeed": 2.5,
-    "fireSpeed": 2
+    "fireSpeed": 1.5
   },
   {
     "type": "normal",

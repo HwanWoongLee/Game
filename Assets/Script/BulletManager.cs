@@ -114,6 +114,7 @@ public class BulletManager : ObjectManager
         fireBullet.GetComponent<Bullet>().isFire = true;
     }
 
+    //exPlayer용 fireBullet
     public void FireBullets(Vector3 _pos, Vector3 _dir, float _damage)
     {
         //총알하나 불러와서

@@ -19,6 +19,10 @@ public class ScrollCheckBox : MonoBehaviour {
     float buyTime;
     public bool buyState = false;
 
+    public GameObject[] topImage;
+    public GameObject[] rightImage;
+    public GameObject[] leftImage;
+
     public GameObject[] leverImage;
     public GameObject valve;
 
@@ -44,8 +48,8 @@ public class ScrollCheckBox : MonoBehaviour {
             valve.GetComponent<TweenRotation>().enabled = true;
             homeButton.SetActive(false);
             grid.GetComponent<UIDragScrollView>().enabled = false;
-
-            if(buyTime >= 5f)
+            
+            if (buyTime >= 5f)
             {
                 SoundManager.instance.PlayEffectSound(14);
                 buyPop.SetActive(true);
@@ -53,6 +57,13 @@ public class ScrollCheckBox : MonoBehaviour {
                 valve.GetComponent<TweenRotation>().enabled = false;
                 leverImage[1].SetActive(false);
                 leverImage[0].SetActive(true);
+
+                topImage[1].SetActive(false);
+                topImage[0].SetActive(true);
+                rightImage[1].SetActive(false);
+                rightImage[0].SetActive(true);
+                leftImage[1].SetActive(false);
+                leftImage[0].SetActive(true);
 
                 homeButton.SetActive(true);
                 grid.GetComponent<UIDragScrollView>().enabled = true;
@@ -68,7 +79,7 @@ public class ScrollCheckBox : MonoBehaviour {
         {
             if (GameManager.instance.coin >= 100 && LootNum >= 10)
             {
-                SoundManager.instance.PlayEffectSound(0);
+                SoundManager.instance.PlayEffectSound(26);
 
                 GameManager.instance.coin -= 100;
                 GameObject effect = Instantiate(effectPrefab);
@@ -79,6 +90,12 @@ public class ScrollCheckBox : MonoBehaviour {
 
                 leverImage[0].SetActive(false);
                 leverImage[1].SetActive(true);
+                topImage[0].SetActive(false);
+                topImage[1].SetActive(true);
+                rightImage[0].SetActive(false);
+                rightImage[1].SetActive(true);
+                leftImage[0].SetActive(false);
+                leftImage[1].SetActive(true);
 
                 switch (checkNum)
                 {

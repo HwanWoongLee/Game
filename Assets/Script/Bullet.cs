@@ -221,6 +221,11 @@ public class Bullet : MonoBehaviour
                 _effect.transform.position = other.transform.position;
                 _effect.GetComponent<ParticleSystem>().time = 0;
                 _effect.GetComponent<ParticleSystem>().Play();
+
+                _effect.transform.localScale = new Vector3(BulletManager.instance.bulletScale,
+                                                           BulletManager.instance.bulletScale,
+                                                           BulletManager.instance.bulletScale);
+
                 _effect.gameObject.SetActive(true);
             }
             else

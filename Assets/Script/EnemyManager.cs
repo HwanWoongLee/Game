@@ -17,9 +17,8 @@ public class EnemyManager : ObjectManager
     [SerializeField]
     private float maxRange, minRange;
 
-    public GameObject bossWarningLabel;
-
     private List<GameObject> warningList = new List<GameObject>();
+    private List<GameObject> damageLabelList = new List<GameObject>();
 
     public Camera uiCam;
     private SmoothCamera mainCam;
@@ -46,6 +45,7 @@ public class EnemyManager : ObjectManager
     {
         MakeObjs(this.makeObj[0]);
 
+        //Warning Mark
         for (int i = 0; i < 200; i++)
         {
             GameObject _warning = Instantiate(this.makeObj[1]);
@@ -53,6 +53,16 @@ public class EnemyManager : ObjectManager
             _warning.SetActive(false);
 
             warningList.Add(_warning);
+        }
+
+        //Damage Label
+        for (int i = 0; i < 200; i++)
+        {
+            GameObject _label = Instantiate(this.makeObj[2]);
+            _label.transform.parent = this.transform;
+            _label.SetActive(false);
+
+            damageLabelList.Add(_label);
         }
     }
 
@@ -69,7 +79,6 @@ public class EnemyManager : ObjectManager
         laserTime = 0f;
         circleTime = 0f;
 
-        bossWarningLabel.SetActive(false);
         bossHpObj.SetActive(false);
     }
 
@@ -83,6 +92,20 @@ public class EnemyManager : ObjectManager
                 return _warning;
             }
         }
+
+        return null;
+    }
+
+    public GameObject GetDamageLabel()
+    {
+        foreach(GameObject _label in damageLabelList)
+        {
+            if(!_label.activeInHierarchy)
+            {
+                return _label;
+            }
+        }
+
         return null;
     }
 
@@ -362,7 +385,7 @@ public class EnemyManager : ObjectManager
                 }
             }
             //Circle Type Enemy Rend
-            if (circleTime >= rendDeleyTime * 14f)
+            if (circleTime >= rendDeleyTime * 16f)
             {
                 SoundManager.instance.PlayEffectSound(12);
 
@@ -396,7 +419,7 @@ public class EnemyManager : ObjectManager
                                 = newEnemy.GetComponent<Enemy>().circleStandard
                                 = new Vector3(x , y, 0) + ((player.transform.position - new Vector3(x,y,0)) * 0.3f);
                             newEnemy.GetComponent<Enemy>().SetType(EnemyType.circle);
-                            newEnemy.GetComponent<Enemy>().circleDelay = (i + 5) * .2f;
+                            newEnemy.GetComponent<Enemy>().circleDelay = (i + 10) * .3f;
                             newEnemy.GetComponent<Enemy>().renderer.enabled = false;
                             newEnemy.SetActive(true);
                         }
@@ -422,16 +445,11 @@ public class EnemyManager : ObjectManager
                 {
                     SoundManager.instance.PlayEffectSound(15);
 
-                    //보스 경고
-                    bossWarningLabel.GetComponent<TweenPosition>().ResetToBeginning();
-                    bossWarningLabel.GetComponent<TweenPosition>().Play();
-                    bossWarningLabel.SetActive(true);
-
                     //보스 HpBar
                     bossHpObj.GetComponent<TweenPosition>().ResetToBeginning();
                     bossHpObj.GetComponent<TweenPosition>().Play();
                     bossHpObj.SetActive(true);
-           
+
                     mainCam.OnBlur();
 
                     //위치지정
@@ -469,8 +487,10 @@ public class EnemyManager : ObjectManager
                 }
             }
             //보스 등장 시 라인 줄어들음
-            touchManager.limitDistance -= Time.deltaTime;
-
+            if (touchManager.limitDistance >= 3)
+            {
+                touchManager.limitDistance -= Time.deltaTime;
+            }
             //stage 시간이 다 지났을 때 적을 검사
             if (!CheckObj())
             {

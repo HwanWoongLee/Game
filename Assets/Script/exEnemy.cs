@@ -18,7 +18,7 @@ public class exEnemy : MonoBehaviour
 
 
             //데미지 표시
-            ShowDamage(GameManager.instance.player.Damage, this.transform.position);
+            ShowDamage(other.GetComponent<Bullet>().bulletDamage, this.transform.position);
 
         }
 

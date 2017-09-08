@@ -105,7 +105,10 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        MoveToPlayer();
+        if (GameManager.instance.curGameState == GameState.game)
+        {
+            MoveToPlayer();
+        }
     }
 
     //이동
@@ -264,7 +267,7 @@ public class Enemy : MonoBehaviour
     }
 
     //Enemy죽음 체크
-    public void DeadCheck()
+    public void DeadCheck(bool pew)
     {
         if (Life <= 0)
         {
@@ -317,7 +320,14 @@ public class Enemy : MonoBehaviour
 
                 GameManager.instance.greenLoot++;
 
-                SoundManager.instance.PlayEffectSound(1);
+                if (pew)
+                {
+                    SoundManager.instance.PlayEffectSound(27);
+                }
+                else
+                {
+                    SoundManager.instance.PlayEffectSound(1);
+                }
             }
             else if (this.enemyType == EnemyType.speeder)
             {
@@ -325,7 +335,14 @@ public class Enemy : MonoBehaviour
 
                 GameManager.instance.blueLoot++;
 
-                SoundManager.instance.PlayEffectSound(1);
+                if (pew)
+                {
+                    SoundManager.instance.PlayEffectSound(27);
+                }
+                else
+                {
+                    SoundManager.instance.PlayEffectSound(1);
+                }
             }
             else
             {
@@ -333,7 +350,14 @@ public class Enemy : MonoBehaviour
 
                 GameManager.instance.redLoot++;
 
-                SoundManager.instance.PlayEffectSound(1);
+                if (pew)
+                {
+                    SoundManager.instance.PlayEffectSound(27);
+                }
+                else
+                {
+                    SoundManager.instance.PlayEffectSound(1);
+                }
             }
 
             this.gameObject.SetActive(false);
@@ -343,7 +367,7 @@ public class Enemy : MonoBehaviour
     //Damage표시.
     private void ShowDamage(int _damage, Vector3 pos)
     {
-        GameObject newlabel = Instantiate(damageLabel);
+        GameObject newlabel = EnemyManager.instance.GetDamageLabel();
 
         newlabel.transform.localScale = new Vector3(1, 1, 1);
         newlabel.transform.position = pos;
@@ -351,9 +375,14 @@ public class Enemy : MonoBehaviour
         newlabel.transform.FindChild("label").GetComponent<UILabel>().text = _damage.ToString();
 
         newlabel.GetComponent<TweenPosition>().from = pos;
-        newlabel.GetComponent<TweenPosition>().to = pos + (Vector3.up * 1f);
+        newlabel.GetComponent<TweenPosition>().to = pos + (Vector3.up * 2f);
 
-        Destroy(newlabel, 1f);
+        newlabel.GetComponent<TweenPosition>().ResetToBeginning();
+        newlabel.GetComponent<TweenPosition>().Play();
+        newlabel.GetComponent<TweenAlpha>().ResetToBeginning();
+        newlabel.GetComponent<TweenAlpha>().Play();
+
+        newlabel.SetActive(true);
     }
 
     //충돌체크
@@ -378,7 +407,7 @@ public class Enemy : MonoBehaviour
             //데미지 표시
             ShowDamage(other.GetComponent<Bullet>().bulletDamage, this.transform.position);
 
-            DeadCheck();
+            DeadCheck(false);
 
             if (this.enemyType == EnemyType.boss)
             {
@@ -402,7 +431,7 @@ public class Enemy : MonoBehaviour
             //데미지 표시
             ShowDamage(player.Damage, this.transform.position);
 
-            DeadCheck();
+            DeadCheck(false);
 
             if (this.enemyType == EnemyType.boss)
             {
@@ -416,7 +445,7 @@ public class Enemy : MonoBehaviour
 
             ShowDamage(999, this.transform.position);
 
-            DeadCheck();
+            DeadCheck(true);
         }
     }
 
@@ -440,7 +469,7 @@ public class Enemy : MonoBehaviour
                 //데미지 표시
                 ShowDamage(player.Damage, this.transform.position);
 
-                DeadCheck();
+                DeadCheck(false);
 
                 if (this.enemyType == EnemyType.boss)
                 {

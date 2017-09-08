@@ -56,7 +56,8 @@ public class Player : MonoBehaviour
     public GameObject masterEffect;
     public GameObject starEffect;
     public GameObject getCoinLabel;
- 
+    public GameObject explosionEffect;
+
     //플레이어 초기화
     public void InitPlayer()
     {
@@ -117,7 +118,7 @@ public class Player : MonoBehaviour
                 speedTime += Time.deltaTime;
                 if (speedTime >= 5f)
                 {
-                    moveSpeed -= 3f;
+                    moveSpeed = 3f;
                     getSpeedItem = false;
                     speedTime = 0f;
                 }
@@ -372,6 +373,8 @@ public class Player : MonoBehaviour
             && GameManager.instance.curGameState != GameState.ready)
             return;
 
+        Debug.Log("?? : " + other.name);
+
         if (other.transform.tag.Equals("Bullet")
             || other.transform.tag.Equals("Warning")
             || other.transform.tag.Equals("BobmEffect")
@@ -390,7 +393,7 @@ public class Player : MonoBehaviour
             case "MoveItem":
                 getSpeedItem = true;
                 speedTime = 0f;
-                moveSpeed += 3f;
+                moveSpeed = 5f;
 
                 GetItem(0);
 
@@ -408,6 +411,14 @@ public class Player : MonoBehaviour
                 //보스 충돌시 레벨에 관련없이 over
                 if (other.transform.GetComponent<Enemy>().enemyType == EnemyType.boss)
                 {
+                    SoundManager.instance.PlayEffectSound(24);
+
+                    this.gameObject.SetActive(false);
+
+                    GameObject effect = Instantiate(explosionEffect);
+                    effect.transform.position = this.transform.position;
+                    Destroy(effect, 3f);
+
                     GameManager.instance.StateTransition(GameState.over);
                     break;
                 }
@@ -419,6 +430,14 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
+                    SoundManager.instance.PlayEffectSound(24);
+
+                    this.gameObject.SetActive(false);
+
+                    GameObject effect = Instantiate(explosionEffect);
+                    effect.transform.position = this.transform.position;
+                    Destroy(effect, 3f);
+
                     GameManager.instance.StateTransition(GameState.over);
                 }
                 break;
@@ -490,7 +509,7 @@ public class Player : MonoBehaviour
                 _starEffect.GetComponent<TweenScale>().Play();
                 _starEffect.SetActive(true);
 
-                ItemManager.instance.RendFever();
+                //ItemManager.instance.RendFever();
                 break;
         }
 

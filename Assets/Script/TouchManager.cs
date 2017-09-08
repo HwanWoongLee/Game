@@ -130,26 +130,6 @@ public class TouchManager : MonoBehaviour
                     {
                         dirDragVec = subCam.ScreenToWorldPoint(_touch[i].position);
                     }
-                    ////현태 드래그 위치에 ray를 쏨
-                    //Ray ray = subCam.ScreenPointToRay(_touch[i].position);
-
-                    //RaycastHit hit;
-
-                    //if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
-                    //{
-                    //    if (hit.collider.transform.tag.Equals("JoyStick"))
-                    //    {
-                    //        joyDragVec = subCam.ScreenToWorldPoint(_touch[i].position);
-                    //        joyNum = i;
-                    //        joyDrag = true;
-                    //    }
-                    //    if (hit.collider.transform.tag.Equals("DirectionStick"))
-                    //    {
-                    //        dirDragVec = subCam.ScreenToWorldPoint(_touch[i].position);
-                    //        dirNum = i;
-                    //        dirDrag = true;
-                    //    }
-                    //}
                 }
 
                 //터치 뗄때
