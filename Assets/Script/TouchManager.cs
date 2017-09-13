@@ -89,7 +89,6 @@ public class TouchManager : MonoBehaviour
                             {
                                 GameManager.instance.StateTransition(GameState.game);
                                 SoundManager.instance.PlayEffectSound(0);
-                                SoundManager.instance.PlayBGMSound();
                             }
                         }
                     }

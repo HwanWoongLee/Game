@@ -16,7 +16,7 @@ public class StarItem : MonoBehaviour
     //활성화시 조준
     private void OnEnable()
     {
-        Invoke("Disable", 30f);
+        Invoke("Disable", 12f);
         if (!aiming)
         {
             playerPos = plaeyr.transform.position;

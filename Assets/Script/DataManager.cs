@@ -18,6 +18,7 @@ public class DataManager
 
     public void SetData()
     {
+        PlayerPrefs.SetInt("TOPSTAGE", GameManager.instance.topStageNum);
         PlayerPrefs.SetInt("TOPSCORE", GameManager.instance.topScore);
         PlayerPrefs.SetInt("COIN", GameManager.instance.coin);
 
@@ -39,6 +40,7 @@ public class DataManager
 
     public void GetData()
     {
+        GameManager.instance.topStageNum = PlayerPrefs.GetInt("TOPSTAGE");
         GameManager.instance.topScore = PlayerPrefs.GetInt("TOPSCORE");
         GameManager.instance.coin = PlayerPrefs.GetInt("COIN");
 

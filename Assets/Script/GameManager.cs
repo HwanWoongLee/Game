@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
 
     //스테이지
+    public int topStageNum = 0;
     public int stageNum = 0;
     public float stageCurTime = 0f;
     public float stageLimitTime = 30f;
@@ -128,10 +129,23 @@ public class GameManager : MonoBehaviour
         if (topScore <= curScore)
         {
             topScore = curScore;
-        }
+
+            if(topScore >= 6000)
+            {
+                GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCg");
+            }
+            else if (topScore >= 600)
+            {
+                GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCQ");
+            }
+            else if (topScore >= 60)
+            {
+                GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCA");
+            }
+        }   
     }
 
-
+    //뒤로가기
     public void BackButton()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -154,7 +168,7 @@ public class GameManager : MonoBehaviour
                         joyStick1.SetActive(false);
                         joyStick2.SetActive(false);
 
-                        SoundManager.instance.bgmAudio.Pause();
+                        SoundManager.instance.bgmAudio.mute = true;
                         Time.timeScale = 0f;
                         pausePop.GetComponent<TweenScale>().ResetToBeginning();
                         pausePop.GetComponent<TweenScale>().Play();
@@ -171,10 +185,12 @@ public class GameManager : MonoBehaviour
                 case GameState.store:
                     SoundManager.instance.PlayEffectSound(0);
                     StateTransition(GameState.main);
+                    player.gameObject.SetActive(true);
                     break;
                 case GameState.store2:
                     SoundManager.instance.PlayEffectSound(0);
                     StateTransition(GameState.main);
+                    player.gameObject.SetActive(true);
                     break;
             }
         }
@@ -197,13 +213,18 @@ public class GameManager : MonoBehaviour
         joyStick1.SetActive(true);
         joyStick2.SetActive(true);
 
-        SoundManager.instance.bgmAudio.Play();
+        SoundManager.instance.bgmAudio.mute = false;
         pausePop.SetActive(false);
         pauseState = false;
     }
 
     private void GameOver()
     {
+        //top Score,Stage report
+        GPGSMng.gpgsInstance.ReportScore(topScore);
+        GPGSMng.gpgsInstance.ReportStage(topStageNum);
+
+        //Bgm Stop, Over Sound On
         SoundManager.instance.StopBGMSound();
         SoundManager.instance.PlayEffectSound(3);
 
@@ -220,6 +241,8 @@ public class GameManager : MonoBehaviour
                 overState = false;
                 break;
             case GameState.game:
+                SoundManager.instance.PlayBGMSound();
+
                 EnemyManager.instance.RendEnemy();
                 ItemManager.instance.RendItem();
                 overState = false;

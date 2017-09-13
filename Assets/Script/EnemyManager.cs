@@ -505,6 +505,21 @@ public class EnemyManager : ObjectManager
                 GameManager.instance.stageCurTime = 0f;
                 GameManager.instance.stageLimitTime += 5f;
 
+                //Report
+                if (GameManager.instance.stageNum >= 5)
+                {
+                    if (PlayerPrefs.GetInt("FIRSTSTAGE6") == 0)
+                    {
+                        GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQBw");
+                        PlayerPrefs.SetInt("FIRSTSTAGE6", 1);
+                    }
+                }
+
+                if (GameManager.instance.topStageNum <= GameManager.instance.stageNum)
+                {
+                    GameManager.instance.topStageNum = GameManager.instance.stageNum;
+                }
+
                 //StarItem
                 ItemManager.instance.RendStarItem(Random.Range(5,GameManager.instance.stageLimitTime));
 

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour {
     public Camera uiCam;
+    public GeneralShare share;
 
     string[] layer = new string[] { "UI", "Bullet" };
 
@@ -108,8 +109,8 @@ public class UIManager : MonoBehaviour {
                     Invoke("GameOver", 2f);
                 }
 
-                overStageNum.text = "stage : " + temp.ToString();
-
+                overStageNum.text = "clear : " + temp.ToString();
+                
                 break;
             case GameState.store:
                 gameStateUI[0].SetActive(false);
@@ -317,8 +318,7 @@ public class UIManager : MonoBehaviour {
         GameManager.instance.player.ChangePlayerType(0);
 
         BulletManager.instance.InitObjs();
-
-        SoundManager.instance.PlayBGMSound();
+        
         SoundManager.instance.PlayEffectSound(0);
     }
     public void StoreButton()
@@ -338,13 +338,21 @@ public class UIManager : MonoBehaviour {
     public void RankButton()
     {
         SoundManager.instance.PlayEffectSound(0);
+
+        GPGSMng.gpgsInstance.ShowBoard();
     }
     public void AchButton()
     {
         SoundManager.instance.PlayEffectSound(0);
+
+        GPGSMng.gpgsInstance.ShowAchievement();
     }
     public void ShareButton()
     {
+        share = new GeneralShare();
+
+        share.shareText("Signal", "\nCan you do this?\n" + "Best Score : " + GameManager.instance.topScore + "!!\n");
+
         SoundManager.instance.PlayEffectSound(0);
     }
 #endregion

@@ -118,6 +118,12 @@ public class ScrollCheckBox : MonoBehaviour {
 
                 DataManager.Instance.SetData();
 
+                if (PlayerPrefs.GetInt("FIRSTSTORE2") == 0)
+                {
+                    GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCw");
+                    PlayerPrefs.SetInt("FIRSTSTORE2", 1);
+                }
+
                 SoundManager.instance.PlayEffectSound(11);
                 buyState = true;
             }

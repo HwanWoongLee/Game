@@ -5,7 +5,7 @@ public class SoundManager : MonoBehaviour {
     public static SoundManager instance;
 
     public AudioClip[] effecSound;
-    public AudioClip bgmSound;
+    public AudioClip[] bgmSound;
 
     private AudioSource effectAudio;
 
@@ -38,15 +38,19 @@ public class SoundManager : MonoBehaviour {
             SoundOff();
         }
     }
-
+    
     public void PlayEffectSound(int _num)
     {
         effectAudio.PlayOneShot(effecSound[_num]);
     }
- 
+
     public void PlayBGMSound()
     {
-        bgmAudio.Play();
+        if (!bgmAudio.isPlaying)
+        {
+            int num = Random.Range(0, 7);
+            bgmAudio.PlayOneShot(bgmSound[num]);
+        }
     }
 
     public void StopBGMSound()

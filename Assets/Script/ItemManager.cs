@@ -109,12 +109,21 @@ public class ItemManager : ObjectManager
 
     public void ActiveStar()
     {
-        SetPos();
-        
-        if(starItem)
-        starItem.transform.position = new Vector3(x, y, 0);
-        starItem.SetActive(true);
-    }   
+        int randNum = Random.Range(0, 2);
+
+        if (randNum == 0)
+        {
+            SetPos();
+
+            if (starItem)
+                starItem.transform.position = new Vector3(x, y, 0);
+            starItem.SetActive(true);
+        }
+        else
+        {
+            return;
+        }
+    }
 
     void ActiveFever()
     {

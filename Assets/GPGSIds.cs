@@ -24,6 +24,18 @@
 
 public static class GPGSIds
 {
+        public const string achievement_stage_6 = "CgkI3IC9vIEPEAIQBw"; // <GPGSID>
+        public const string achievement_its_a_starlight_attack = "CgkI3IC9vIEPEAIQBA"; // <GPGSID>
+        public const string achievement_its_getting_stronger = "CgkI3IC9vIEPEAIQDA"; // <GPGSID>
+        public const string achievement_level_up = "CgkI3IC9vIEPEAIQBQ"; // <GPGSID>
+        public const string achievement_disassemble = "CgkI3IC9vIEPEAIQCw"; // <GPGSID>
+        public const string achievement_level_6 = "CgkI3IC9vIEPEAIQBg"; // <GPGSID>
+        public const string leaderboard_stage = "CgkI3IC9vIEPEAIQDg"; // <GPGSID>
+        public const string achievement_its_the_boss = "CgkI3IC9vIEPEAIQAw"; // <GPGSID>
+        public const string achievement_upgrade_complete = "CgkI3IC9vIEPEAIQDQ"; // <GPGSID>
+        public const string achievement_600_score = "CgkI3IC9vIEPEAIQCQ"; // <GPGSID>
+        public const string achievement_60_score = "CgkI3IC9vIEPEAIQCA"; // <GPGSID>
+        public const string achievement_6000_score = "CgkI3IC9vIEPEAIQCg"; // <GPGSID>
         public const string leaderboard_best_score = "CgkI3IC9vIEPEAIQAg"; // <GPGSID>
 
 }

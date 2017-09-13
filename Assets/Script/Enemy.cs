@@ -194,6 +194,7 @@ public class Enemy : MonoBehaviour
     public void SetType(EnemyType _type)
     {
         enemyType = _type;
+        this.renderer.enabled = true;
 
         switch (enemyType)
         {
@@ -297,22 +298,29 @@ public class Enemy : MonoBehaviour
                     ItemManager.instance.boxItems.Add(dropBox);
                     dropBox.SetActive(true);
                 }
-
-                //Enemy전부 죽임
-                foreach (GameObject _enemy in EnemyManager.instance.objList)
+                //Enemy 전부 죽임
+                for (int i = 0; i < EnemyManager.instance.objList.Count; i++)
                 {
-                    if (_enemy.activeInHierarchy)
+                    if (EnemyManager.instance.objList[i].activeInHierarchy)
                     {
-                        _enemy.SetActive(false);
+                        EnemyManager.instance.objList[i].SetActive(false);
 
                         _effect = Instantiate(desEffect);
-                        _effect.transform.position = _enemy.transform.position;
+                        _effect.transform.position = EnemyManager.instance.objList[i].transform.position;
                         Destroy(_effect, 0.5f);
                     }
                 }
 
                 SoundManager.instance.PlayEffectSound(2);
 
+                //화면흔들기 
+                GameManager.instance.mainCam.GetComponent<CameraShake>().shake = 1f;
+
+                if(PlayerPrefs.GetInt("FIRSTBOSSKILL") == 0)
+                {
+                    GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQAw");
+                    PlayerPrefs.SetInt("FIRSTBOSSKILL", 1);
+                }
             }
             else if (this.enemyType == EnemyType.tanker)
             {
@@ -443,7 +451,7 @@ public class Enemy : MonoBehaviour
         {
             Life = 0;
 
-            ShowDamage(999, this.transform.position);
+            //ShowDamage(999, this.transform.position);
 
             DeadCheck(true);
         }

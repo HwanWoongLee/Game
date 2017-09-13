@@ -3,7 +3,6 @@ using System.Collections;
 
 public class CameraShake : MonoBehaviour
 {
-
     public Transform camTransform;
     
     public float shake = 0f;
@@ -37,7 +36,7 @@ public class CameraShake : MonoBehaviour
         else
         {
             shake = 0f;
-            camTransform.localPosition = originalPos;
+            originalPos = this.transform.position;
         }
     }
 }

@@ -69,6 +69,12 @@ public class Store : MonoBehaviour
             && levels[1] >= 4
             && levels[2] >= 4)
         {
+            if (PlayerPrefs.GetInt("FIRSTMASTER") == 0)
+            {
+                GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQDQ");
+                PlayerPrefs.SetInt("FIRSTMASTER", 1);
+            }
+
             masterEffect.SetActive(true);
         }
         else
@@ -270,6 +276,12 @@ public class Store : MonoBehaviour
                 levels[0]++;
                 player.GetPlayerJsonData();
                 SetPrice();
+
+                if (PlayerPrefs.GetInt("FIRSTSTORE") == 0)
+                {
+                    GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQDA");
+                    PlayerPrefs.SetInt("FIRSTSTORE", 1);
+                }
             }
         }
         else
@@ -290,6 +302,12 @@ public class Store : MonoBehaviour
                 levels[1]++;
                 player.GetPlayerJsonData();
                 SetPrice();
+
+                if (PlayerPrefs.GetInt("FIRSTSTORE") == 0)
+                {
+                    GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQDA");
+                    PlayerPrefs.SetInt("FIRSTSTORE", 1);
+                }
             }
         }
         else
@@ -310,6 +328,12 @@ public class Store : MonoBehaviour
                 levels[2]++;
                 player.GetPlayerJsonData();
                 SetPrice();
+
+                if (PlayerPrefs.GetInt("FIRSTSTORE") == 0)
+                {
+                    GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQDA");
+                    PlayerPrefs.SetInt("FIRSTSTORE", 1);
+                }
             }
         }
         else

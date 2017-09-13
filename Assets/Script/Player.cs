@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     public GameObject getCoinLabel;
     public GameObject explosionEffect;
 
+
     //플레이어 초기화
     public void InitPlayer()
     {
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
 
         //방향
         this.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+        fireDirection = Vector3.up;
 
         //이동, 발사속도,Dmage
         GetPlayerJsonData();
@@ -89,7 +91,7 @@ public class Player : MonoBehaviour
         limit = 0;
 
         dummyNum = 0;
-
+        
         this.gameObject.SetActive(false);
     }
 
@@ -107,6 +109,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         RotateDummy();
+        
         if (GameManager.instance.curGameState == GameState.game)
         {
             PlayerFired();
@@ -277,6 +280,21 @@ public class Player : MonoBehaviour
         powerNum++;
 
         MakeDummy();
+
+        if (PlayerPrefs.GetInt("FIRSTLEVELUP") == 0)
+        {
+            GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQBQ");
+            PlayerPrefs.SetInt("FIRSTLEVELUP", 1);
+        }
+
+        if (powerNum >= 5)
+        {
+            if (PlayerPrefs.GetInt("FIRSTLEVEL6") == 0)
+            {
+                GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQBg");
+                PlayerPrefs.SetInt("FIRSTLEVEL6", 1);
+            }
+        }
     }
 
     //플레이어 방향 전환
@@ -322,6 +340,7 @@ public class Player : MonoBehaviour
         _dummy.transform.localRotation = Quaternion.identity;
 
         //Sprite Image변경
+        _dummy.GetComponent<Player>().playerType = this.playerType;
         _dummy.GetComponent<Player>().playerSprite[0].GetComponent<SpriteRenderer>().sprite = playerImage[this.playerType];
         _dummy.GetComponent<Player>().playerSprite[1].GetComponent<SpriteRenderer>().sprite = playerImage[this.playerType];
 
@@ -373,8 +392,6 @@ public class Player : MonoBehaviour
             && GameManager.instance.curGameState != GameState.ready)
             return;
 
-        Debug.Log("?? : " + other.name);
-
         if (other.transform.tag.Equals("Bullet")
             || other.transform.tag.Equals("Warning")
             || other.transform.tag.Equals("BobmEffect")
@@ -389,6 +406,7 @@ public class Player : MonoBehaviour
                 GetItem(1);
 
                 SoundManager.instance.PlayEffectSound(23);
+                other.transform.gameObject.SetActive(false);
                 break;
             case "MoveItem":
                 getSpeedItem = true;
@@ -398,6 +416,7 @@ public class Player : MonoBehaviour
                 GetItem(0);
 
                 SoundManager.instance.PlayEffectSound(20);
+                other.transform.gameObject.SetActive(false);
                 break;
             case "MagnetItem":
                 getMagnetItem = true;
@@ -405,6 +424,7 @@ public class Player : MonoBehaviour
                 GetItem(2);
 
                 SoundManager.instance.PlayEffectSound(22);
+                other.transform.gameObject.SetActive(false);
                 break;
             //적충돌
             case "Enemy":
@@ -423,11 +443,14 @@ public class Player : MonoBehaviour
                     break;
                 }
 
+                //Dummy가 있을경우 
                 if (powerNum > 0)
                 {
                     SoundManager.instance.PlayEffectSound(19);
+                    gaugeState = false;
                     powerGauge = 0;
                 }
+                //없으면 GameOver
                 else
                 {
                     SoundManager.instance.PlayEffectSound(24);
@@ -490,7 +513,7 @@ public class Player : MonoBehaviour
                     case GetBox.boxType.coin:
                         SoundManager.instance.PlayEffectSound(18);
 
-                        int getCoinNum = (GameManager.instance.stageNum * Random.Range(30, 101));
+                        int getCoinNum = (GameManager.instance.stageNum * Random.Range(30, 81));
 
                         GameManager.instance.coin += getCoinNum;
 
@@ -499,6 +522,7 @@ public class Player : MonoBehaviour
                 }
 
                 GameManager.instance.StateTransition(GameState.game);
+                other.transform.gameObject.SetActive(false);
                 break;
             case "StarItem":
                 SoundManager.instance.PlayEffectSound(16);
@@ -509,11 +533,16 @@ public class Player : MonoBehaviour
                 _starEffect.GetComponent<TweenScale>().Play();
                 _starEffect.SetActive(true);
 
-                //ItemManager.instance.RendFever();
+                other.transform.gameObject.SetActive(false);
+
+                if (PlayerPrefs.GetInt("FIRSTGETSTAR") == 0)
+                {
+                    GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQBA");
+                    PlayerPrefs.SetInt("FIRSTGETSTAR", 1);
+                }
                 break;
         }
 
-        other.transform.gameObject.SetActive(false);
     }
 
     private void ShowGetCoin(int _coin, Vector3 pos)
