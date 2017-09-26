@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     private int standardLife;
 
     public int tankerLife = 5;
-    public int bossLife = 20;
+    public int bossLife = 30;
     public int normalLife = 1;
 
     //맞을때 이펙트, 라벨
@@ -205,7 +205,7 @@ public class Enemy : MonoBehaviour
                 this.transform.localScale = new Vector3((GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2);
-                moveSpeed = 1.5f;
+                moveSpeed = 1.6f;
                 break;
             case EnemyType.speeder:
                 this.renderer.gameObject.layer = 0;
@@ -214,7 +214,7 @@ public class Enemy : MonoBehaviour
                 this.transform.localScale = new Vector3((GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2);
-                moveSpeed = 2.5f;
+                moveSpeed = 2.7f;
                 break;
             case EnemyType.tanker:
                 this.renderer.gameObject.layer = 0;
@@ -223,7 +223,7 @@ public class Enemy : MonoBehaviour
                 this.transform.localScale = new Vector3((GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2);
-                moveSpeed = 1.5f;
+                moveSpeed = 1.6f;
                 break;
             case EnemyType.laser:
                 this.renderer.gameObject.layer = 0;
@@ -232,7 +232,7 @@ public class Enemy : MonoBehaviour
                 this.transform.localScale = new Vector3((GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2);
-                moveSpeed = 15f;
+                moveSpeed = 14f;
 
                 if (GameManager.instance.stageNum >= 8)
                 {
@@ -246,7 +246,7 @@ public class Enemy : MonoBehaviour
                 this.transform.localScale = new Vector3((GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2,
                                                         (GameManager.instance.stageNum * .25f) + 2);
-                moveSpeed = 7.5f;
+                moveSpeed = 7.7f;
 
                 if (GameManager.instance.stageNum >= 8)
                 {
@@ -261,7 +261,7 @@ public class Enemy : MonoBehaviour
                 this.transform.localScale = new Vector3((GameManager.instance.stageNum  * .5f) + 2,
                                                         (GameManager.instance.stageNum * .5f) + 2,
                                                        (GameManager.instance.stageNum * .5f) + 2);
-                moveSpeed = 0.05f;
+                moveSpeed = 0.06f;
 
                 break;
         }
@@ -314,7 +314,7 @@ public class Enemy : MonoBehaviour
                 SoundManager.instance.PlayEffectSound(2);
 
                 //화면흔들기 
-                GameManager.instance.mainCam.GetComponent<CameraShake>().shake = 1f;
+                GameManager.instance.mainCam.GetComponent<CameraShake>().shake = .5f;
 
                 if(PlayerPrefs.GetInt("FIRSTBOSSKILL") == 0)
                 {
@@ -450,9 +450,7 @@ public class Enemy : MonoBehaviour
         else if (other.transform.tag.Equals("Fever"))
         {
             Life = 0;
-
-            //ShowDamage(999, this.transform.position);
-
+            
             DeadCheck(true);
         }
     }

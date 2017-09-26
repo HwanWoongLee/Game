@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
     public float starTime = 0f;
     private float starDeleyTime = 1.5f;
 
-
     //스테이지
     public int topStageNum = 0;
     public int stageNum = 0;
@@ -55,6 +54,10 @@ public class GameManager : MonoBehaviour
     public bool pauseState = false;
 
     public GameObject joyStick1, joyStick2;
+
+    public UILabel scoreLabel;
+    bool labelState = false;
+    float fontSize;
 
     private void Awake()
     {
@@ -101,6 +104,7 @@ public class GameManager : MonoBehaviour
         stageNum = 0;
         stageLimitTime = 30;
         overState = true;
+        labelState = false;
     }
 
     //시간조정
@@ -126,6 +130,10 @@ public class GameManager : MonoBehaviour
     {
         curScore += num;
 
+        labelState = true;
+        fontSize = 1.2f;
+        scoreLabel.transform.localScale = new Vector3(fontSize, fontSize, fontSize);
+
         if (topScore <= curScore)
         {
             topScore = curScore;
@@ -143,6 +151,21 @@ public class GameManager : MonoBehaviour
                 GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCA");
             }
         }   
+    }
+
+    //ScoreLabel 효과
+    private void SocreLabelEffect()
+    {
+        scoreLabel.transform.localScale = new Vector3(fontSize, fontSize, fontSize);
+
+        fontSize -= 0.01f;
+
+        if(fontSize <= 1f)
+        {
+            fontSize = 1f;
+            scoreLabel.transform.localScale = new Vector3(fontSize, fontSize, fontSize);
+            labelState = false;
+        }
     }
 
     //뒤로가기
@@ -250,7 +273,7 @@ public class GameManager : MonoBehaviour
             case GameState.over:
                 if (!overState)
                 {
-                    Invoke("GameOver", 2f);
+                    Invoke("GameOver", 1f);
                     overState = true;
                 }             
                 break;
@@ -270,5 +293,10 @@ public class GameManager : MonoBehaviour
     {
         Game();
         BackButton();
+
+        if(labelState)
+        {
+            SocreLabelEffect();
+        }
     }
 }

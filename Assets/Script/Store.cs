@@ -26,6 +26,7 @@ public class Store : MonoBehaviour
     public UILabel[] stoneLabel = new UILabel[3];
     public UILabel[] priceLabel = new UILabel[3];
     public UILabel pName;
+    public UILabel upgradeLabel;
 
     private void Start()
     {
@@ -277,6 +278,9 @@ public class Store : MonoBehaviour
                 player.GetPlayerJsonData();
                 SetPrice();
 
+                GameObject label = Instantiate(upgradeLabel.gameObject);
+                label.GetComponent<UILabel>().text = "+ damage";
+
                 if (PlayerPrefs.GetInt("FIRSTSTORE") == 0)
                 {
                     GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQDA");
@@ -303,6 +307,9 @@ public class Store : MonoBehaviour
                 player.GetPlayerJsonData();
                 SetPrice();
 
+                GameObject label = Instantiate(upgradeLabel.gameObject);
+                label.GetComponent<UILabel>().text = "+ size";
+
                 if (PlayerPrefs.GetInt("FIRSTSTORE") == 0)
                 {
                     GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQDA");
@@ -328,6 +335,9 @@ public class Store : MonoBehaviour
                 levels[2]++;
                 player.GetPlayerJsonData();
                 SetPrice();
+
+                GameObject label = Instantiate(upgradeLabel.gameObject);
+                label.GetComponent<UILabel>().text = "+ fire speed";
 
                 if (PlayerPrefs.GetInt("FIRSTSTORE") == 0)
                 {

@@ -11,7 +11,7 @@ public class TouchManager : MonoBehaviour
     private Camera subCam;
 
     [SerializeField]
-    private SmoothCamera cam,bloomCam;
+    private SmoothCamera cam, bloomCam;
 
     [SerializeField]
     private GameObject player;
@@ -42,12 +42,12 @@ public class TouchManager : MonoBehaviour
         if (GameManager.instance.curGameState == GameState.store
             || GameManager.instance.curGameState == GameState.store2)
             return;
-        
+
         cam.ZoomCamera(joyDrag);
         bloomCam.ZoomCamera(joyDrag);
 
         OnTouch();
-        if (GameManager.instance.curGameState == GameState.game 
+        if (GameManager.instance.curGameState == GameState.game
             || GameManager.instance.curGameState == GameState.ready)
         {
             PlayerMove();
@@ -168,6 +168,11 @@ public class TouchManager : MonoBehaviour
 
     private void PlayerMove()
     {
+        if (GameManager.instance.curGameState.Equals(GameState.ready))
+        {
+            joyDrag = true;
+        }
+
         //이동 조이스틱 드래그 상태일때
         if (joyDrag)
         {
@@ -184,8 +189,15 @@ public class TouchManager : MonoBehaviour
             {
                 joyStick.transform.position = joyDragVec + Vector3.forward * 9;
             }
-            //드래그 거리만큼 시간조정
-            GameManager.instance.SetTimeScale(distance * 0.5f);
+            if (GameManager.instance.curGameState.Equals(GameState.game))
+            {
+                //드래그 거리만큼 시간조정
+                GameManager.instance.SetTimeScale(distance * 0.5f);
+            }
+            else
+            {
+                GameManager.instance.SetTimeScale(1f);
+            }
 
             calPos = joyDragVec - startVec;
 

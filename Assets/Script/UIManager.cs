@@ -106,7 +106,7 @@ public class UIManager : MonoBehaviour {
                 if(!GameManager.instance.overState)
                 {
                     curton[2].SetActive(true);
-                    Invoke("GameOver", 2f);
+                    Invoke("GameOver", 1f);
                 }
 
                 overStageNum.text = "clear : " + temp.ToString();
