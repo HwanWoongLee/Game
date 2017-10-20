@@ -1,0 +1,76 @@
+{
+  "combineData": [
+    {
+      "baseID": 1,
+      "matID01": 3,
+      "matID02": "",
+      "resultID": 13
+    },
+    {
+      "baseID": 1,
+      "matID01": 4,
+      "matID02": "",
+      "resultID": 14
+    },
+    {
+      "baseID": 1,
+      "matID01": 1,
+      "matID02": 1,
+      "resultID": 111
+    },
+    {
+      "baseID": 2,
+      "matID01": 1,
+      "matID02": "",
+      "resultID": 21
+    },
+    {
+      "baseID": 2,
+      "matID01": 2,
+      "matID02": 2,
+      "resultID": 222
+    },
+    {
+      "baseID": 2,
+      "matID01": 4,
+      "matID02": "",
+      "resultID": 24
+    },
+    {
+      "baseID": 3,
+      "matID01": 5,
+      "matID02": "",
+      "resultID": 35
+    },
+    {
+      "baseID": 3,
+      "matID01": 2,
+      "matID02": "",
+      "resultID": 32
+    },
+    {
+      "baseID": 4,
+      "matID01": 5,
+      "matID02": "",
+      "resultID": 45
+    },
+    {
+      "baseID": 4,
+      "matID01": 3,
+      "matID02": "",
+      "resultID": 43
+    },
+    {
+      "baseID": 5,
+      "matID01": 1,
+      "matID02": "",
+      "resultID": 51
+    },
+    {
+      "baseID": 5,
+      "matID01": 2,
+      "matID02": "",
+      "resultID": 52
+    }
+  ]
+}
