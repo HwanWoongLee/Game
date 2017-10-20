@@ -309,6 +309,7 @@
     <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
     <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+    <Compile Include="Assets\LOGO\Logo.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />

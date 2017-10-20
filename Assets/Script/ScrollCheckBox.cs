@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScrollCheckBox : MonoBehaviour {
+public class ScrollCheckBox : MonoBehaviour
+{
     public int checkNum = 0;
     public int LootNum = 0;
     public UILabel LootLabel;
@@ -48,7 +49,7 @@ public class ScrollCheckBox : MonoBehaviour {
             valve.GetComponent<TweenRotation>().enabled = true;
             homeButton.SetActive(false);
             grid.GetComponent<UIDragScrollView>().enabled = false;
-            
+
             if (buyTime >= 5f)
             {
                 SoundManager.instance.PlayEffectSound(14);
@@ -77,78 +78,159 @@ public class ScrollCheckBox : MonoBehaviour {
     {
         if (!buyState)
         {
-            if (GameManager.instance.coin >= 100 && LootNum >= 10)
+            switch (checkNum)
             {
-                SoundManager.instance.PlayEffectSound(26);
+                case 1:
+                    if (GameManager.instance.coin >= 100 && LootNum >= 10)
+                    {
+                        SoundManager.instance.PlayEffectSound(26);
+                        SoundManager.instance.PlayEffectSound(11);
 
-                GameManager.instance.coin -= 100;
-                GameObject effect = Instantiate(effectPrefab);
-                effect.transform.position = new Vector3(0, .5f, 0f);
+                        //코인차감
+                        GameManager.instance.coin -= 100;
+                        GameObject effect = Instantiate(effectPrefab);
+                        effect.transform.position = new Vector3(0, .5f, 0f);
 
-                randNum = Random.Range(30, 51);
-                getCoin = (int)(LootNum * (randNum * 0.01f));
+                        randNum = Random.Range(30, 51);
+                        getCoin = (int)(LootNum * (randNum * 0.01f));
 
-                leverImage[0].SetActive(false);
-                leverImage[1].SetActive(true);
-                topImage[0].SetActive(false);
-                topImage[1].SetActive(true);
-                rightImage[0].SetActive(false);
-                rightImage[1].SetActive(true);
-                leftImage[0].SetActive(false);
-                leftImage[1].SetActive(true);
-
-                switch (checkNum)
-                {
-                    case 1:
                         GameManager.instance.redLoot = 0;
                         GameManager.instance.redCoin += getCoin;
                         LootNum = 0;
-                        break;
-                    case 2:
+
+                        DataManager.Instance.SetData();
+
+                        leverImage[0].SetActive(false);
+                        leverImage[1].SetActive(true);
+                        topImage[0].SetActive(false);
+                        topImage[1].SetActive(true);
+                        rightImage[0].SetActive(false);
+                        rightImage[1].SetActive(true);
+                        leftImage[0].SetActive(false);
+                        leftImage[1].SetActive(true);
+
+                        if (PlayerPrefs.GetInt("FIRSTSTORE2") == 0)
+                        {
+                            GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCw");
+                            PlayerPrefs.SetInt("FIRSTSTORE2", 1);
+                        }
+
+                        buyState = true;
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlayEffectSound(13);
+
+                        this.GetComponent<CameraShake>().shake = .5f;
+                        Debug.Log("not enough coin");
+                    }
+                    break;
+                case 2:
+                    if (GameManager.instance.coin >= 150 && LootNum >= 10)
+                    {
+                        SoundManager.instance.PlayEffectSound(26);
+                        SoundManager.instance.PlayEffectSound(11);
+
+                        //코인차감
+                        GameManager.instance.coin -= 150;
+                        GameObject effect = Instantiate(effectPrefab);
+                        effect.transform.position = new Vector3(0, .5f, 0f);
+
+                        randNum = Random.Range(30, 51);
+                        getCoin = (int)(LootNum * (randNum * 0.01f));
+
                         GameManager.instance.blueLoot = 0;
                         GameManager.instance.blueCoin += getCoin;
                         LootNum = 0;
-                        break;
-                    case 3:
+
+                        DataManager.Instance.SetData();
+
+                        leverImage[0].SetActive(false);
+                        leverImage[1].SetActive(true);
+                        topImage[0].SetActive(false);
+                        topImage[1].SetActive(true);
+                        rightImage[0].SetActive(false);
+                        rightImage[1].SetActive(true);
+                        leftImage[0].SetActive(false);
+                        leftImage[1].SetActive(true);
+
+                        if (PlayerPrefs.GetInt("FIRSTSTORE2") == 0)
+                        {
+                            GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCw");
+                            PlayerPrefs.SetInt("FIRSTSTORE2", 1);
+                        }
+
+                        buyState = true;
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlayEffectSound(13);
+
+                        this.GetComponent<CameraShake>().shake = .5f;
+                        Debug.Log("not enough coin");
+                    }
+                    break;
+                case 3:
+                    if (GameManager.instance.coin >= 300 && LootNum >= 10)
+                    {
+                        SoundManager.instance.PlayEffectSound(26);
+                        SoundManager.instance.PlayEffectSound(11);
+
+                        //코인차감
+                        GameManager.instance.coin -= 300;
+                        GameObject effect = Instantiate(effectPrefab);
+                        effect.transform.position = new Vector3(0, .5f, 0f);
+
+                        randNum = Random.Range(30, 51);
+                        getCoin = (int)(LootNum * (randNum * 0.01f));
+
                         GameManager.instance.greenLoot = 0;
                         GameManager.instance.greenCoin += getCoin;
                         LootNum = 0;
-                        break;
-                }
 
-                DataManager.Instance.SetData();
+                        DataManager.Instance.SetData();
 
-                if (PlayerPrefs.GetInt("FIRSTSTORE2") == 0)
-                {
-                    GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCw");
-                    PlayerPrefs.SetInt("FIRSTSTORE2", 1);
-                }
+                        leverImage[0].SetActive(false);
+                        leverImage[1].SetActive(true);
+                        topImage[0].SetActive(false);
+                        topImage[1].SetActive(true);
+                        rightImage[0].SetActive(false);
+                        rightImage[1].SetActive(true);
+                        leftImage[0].SetActive(false);
+                        leftImage[1].SetActive(true);
 
-                SoundManager.instance.PlayEffectSound(11);
-                buyState = true;
-            }
-            else
-            {
-                SoundManager.instance.PlayEffectSound(13);
+                        if (PlayerPrefs.GetInt("FIRSTSTORE2") == 0)
+                        {
+                            GPGSMng.gpgsInstance.ReportProgress("CgkI3IC9vIEPEAIQCw");
+                            PlayerPrefs.SetInt("FIRSTSTORE2", 1);
+                        }
 
-                this.GetComponent<CameraShake>().shake = .5f;
-                Debug.Log("not enough coin");
+                        buyState = true;
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlayEffectSound(13);
+
+                        this.GetComponent<CameraShake>().shake = .5f;
+                        Debug.Log("not enough coin");
+                    }
+                    break;
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.name == "1"
+        if (other.transform.name == "1"
             || other.transform.name == "2"
             || other.transform.name == "3")
         {
             checkNum = int.Parse(other.transform.name);
-            
+
             other.transform.localScale = new Vector3(1.7f, 1.7f, 1.7f);
         }
-        
-        switch(other.transform.name)
+
+        switch (other.transform.name)
         {
             case "1":
                 price = 100;

@@ -351,7 +351,9 @@ public class UIManager : MonoBehaviour {
     {
         share = new GeneralShare();
 
-        share.shareText("Signal", "\nCan you do this?\n" + "Best Score : " + GameManager.instance.topScore + "!!\n");
+        share.shareText("Signal", "\nCan you do this?\n" + "Best Score : "
+            + GameManager.instance.topScore + "!!\n"
+            + "Android : https://play.google.com/store/apps/details?id=com.sixtycelsius.signal");
 
         SoundManager.instance.PlayEffectSound(0);
     }
