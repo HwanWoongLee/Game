@@ -1,0 +1,39 @@
+{
+    "statData": [
+  {
+    "type": "normal",
+    "level": 1,
+    "damage": 1,
+    "moveSpeed": 1,
+    "fireSpeed": 3
+  },
+  {
+    "type": "normal",
+    "level": 2,
+    "damage": 2,
+    "moveSpeed": 1.5,
+    "fireSpeed": 2.5
+  },
+  {
+    "type": "normal",
+    "level": 3,
+    "damage": 3,
+    "moveSpeed": 2,
+    "fireSpeed": 2
+  },
+  {
+    "type": "normal",
+    "level": 4,
+    "damage": 4,
+    "moveSpeed": 2.5,
+    "fireSpeed": 1.5
+  },
+  {
+    "type": "normal",
+    "level": 5,
+    "damage": 5,
+    "moveSpeed": 3,
+    "fireSpeed": 1
+  }
+]
+}

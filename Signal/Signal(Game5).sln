@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signal(Game5).Plugins", "Signal(Game5).Plugins.csproj", "{689B359D-F8FB-CE7E-2DEF-54398CB8942D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signal(Game5)", "Signal(Game5).csproj", "{8C3091FF-1ECA-37BC-6AF7-1EE2757234B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signal(Game5).Editor", "Signal(Game5).Editor.csproj", "{80BA7C44-0A20-19B1-FFF7-8BC0187E80ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{689B359D-F8FB-CE7E-2DEF-54398CB8942D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{689B359D-F8FB-CE7E-2DEF-54398CB8942D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{689B359D-F8FB-CE7E-2DEF-54398CB8942D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{689B359D-F8FB-CE7E-2DEF-54398CB8942D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C3091FF-1ECA-37BC-6AF7-1EE2757234B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C3091FF-1ECA-37BC-6AF7-1EE2757234B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C3091FF-1ECA-37BC-6AF7-1EE2757234B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C3091FF-1ECA-37BC-6AF7-1EE2757234B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80BA7C44-0A20-19B1-FFF7-8BC0187E80ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80BA7C44-0A20-19B1-FFF7-8BC0187E80ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80BA7C44-0A20-19B1-FFF7-8BC0187E80ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80BA7C44-0A20-19B1-FFF7-8BC0187E80ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
